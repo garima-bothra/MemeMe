@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FP0-u6-wQm">
-                                <rect key="frame" x="20" y="44" width="374" height="774"/>
+                                <rect key="frame" x="20" y="202" width="374" height="502"/>
                             </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PrZ-tY-qAc">
                                 <rect key="frame" x="0.0" y="818" width="414" height="44"/>
@@ -27,20 +27,50 @@
                                             <action selector="pickImageButtonPressed:" destination="BYZ-38-t0r" id="07s-jF-p1M"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" id="XPR-oR-IaH">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jHE-WY-uMP">
+                                            <rect key="frame" x="63.5" y="11" width="24" height="22"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="camera.fill" catalog="system"/>
+                                        </button>
+                                        <connections>
+                                            <action selector="cameraButtonPressed:" destination="BYZ-38-t0r" id="atq-E2-L9m"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uxt-J7-EmE">
+                                <rect key="frame" x="20" y="132" width="374" height="34"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="udV-bc-NQm">
+                                <rect key="frame" x="20" y="728" width="374" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="FP0-u6-wQm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="37A-ct-zNk"/>
-                            <constraint firstItem="FP0-u6-wQm" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="TtR-sl-dSb"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="FP0-u6-wQm" secondAttribute="trailing" constant="20" id="brq-GT-Sfn"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="FP0-u6-wQm" secondAttribute="bottom" constant="44" id="pko-pu-fLk"/>
+                            <constraint firstItem="FP0-u6-wQm" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="8lJ-Tn-0Rn"/>
+                            <constraint firstItem="FP0-u6-wQm" firstAttribute="top" secondItem="Uxt-J7-EmE" secondAttribute="bottom" constant="36" id="G3l-zT-VDx"/>
+                            <constraint firstItem="FP0-u6-wQm" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.560268" id="KiP-a3-nmn"/>
+                            <constraint firstItem="udV-bc-NQm" firstAttribute="top" secondItem="FP0-u6-wQm" secondAttribute="bottom" constant="24" id="a6Z-Dp-9Bg"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="FP0-u6-wQm" secondAttribute="trailing" constant="20" id="cJN-RQ-Fnw"/>
+                            <constraint firstItem="Uxt-J7-EmE" firstAttribute="width" secondItem="FP0-u6-wQm" secondAttribute="width" id="czh-6J-fsn"/>
+                            <constraint firstItem="udV-bc-NQm" firstAttribute="width" secondItem="FP0-u6-wQm" secondAttribute="width" id="drh-cf-cfc"/>
+                            <constraint firstItem="Uxt-J7-EmE" firstAttribute="centerX" secondItem="FP0-u6-wQm" secondAttribute="centerX" id="fu3-Xh-uQx"/>
+                            <constraint firstItem="FP0-u6-wQm" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="fw6-y8-zSv"/>
+                            <constraint firstItem="udV-bc-NQm" firstAttribute="centerX" secondItem="FP0-u6-wQm" secondAttribute="centerX" id="jft-Dx-mAo"/>
+                            <constraint firstItem="FP0-u6-wQm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="sZq-tg-IFA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="bottomTextField" destination="udV-bc-NQm" id="vds-X5-M8A"/>
+                        <outlet property="cameraButton" destination="XPR-oR-IaH" id="qNx-re-hzi"/>
                         <outlet property="imageView" destination="FP0-u6-wQm" id="4UZ-rz-Ia3"/>
+                        <outlet property="topTextField" destination="Uxt-J7-EmE" id="8BS-MA-yIu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -48,4 +78,7 @@
             <point key="canvasLocation" x="137.68115942028987" y="129.91071428571428"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="camera.fill" catalog="system" width="128" height="96"/>
+    </resources>
 </document>
