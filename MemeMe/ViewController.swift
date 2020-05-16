@@ -50,9 +50,13 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
 
     func setupTextFields() {
-         let memeTextAttributes: [NSAttributedString.Key: Any] = [        NSAttributedString.Key.strokeColor: UIColor.systemBackground,         NSAttributedString.Key.foregroundColor: UIColor.secondarySystemBackground ,     NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,                                                               NSAttributedString.Key.strokeWidth:2.0]
+         let memeTextAttributes: [NSAttributedString.Key: Any] = [NSAttributedString.Key.strokeColor: UIColor.systemBackground, NSAttributedString.Key.foregroundColor: UIColor.secondarySystemBackground, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!, NSAttributedString.Key.strokeWidth:2.0]
         topTextField.defaultTextAttributes = memeTextAttributes
+        topTextField.textAlignment = .center
+        topTextField.borderStyle = .none
         bottomTextField.defaultTextAttributes = memeTextAttributes
+        bottomTextField.textAlignment = .center
+        bottomTextField.borderStyle = .none
     }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
