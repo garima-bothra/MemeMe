@@ -65,6 +65,22 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
+
+    func save() {
+            // Create the meme
+        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imageView.image!, memeImage: generateMemedImage())
+    }
+
+    func generateMemedImage() -> UIImage {
+
+        // Render view to an image
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
+        let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+
+        return memedImage
+    }
 }
 
 extension MemeMeViewController: UITextFieldDelegate {
