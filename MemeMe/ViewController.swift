@@ -14,9 +14,11 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        shareButton.isEnabled = false
         setupTextFields()
     }
 
@@ -46,15 +48,35 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBAction func cameraButtonPressed(_ sender: Any) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
+        imagePicker.sourceType = .camera
         present(imagePicker, animated: true, completion: nil)
     }
 
+    @IBAction func shareButtonPressed(_ sender: Any) {
+        let items = [generateMemedImage()]
+        print(items)
+        let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        print(ac)
+        present(ac, animated: true)
+        ac.completionWithItemsHandler = { (activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) -> Void in
+            if completed == true {
+                self.save()
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
     func setupTextFields() {
-         let memeTextAttributes: [NSAttributedString.Key: Any] = [NSAttributedString.Key.strokeColor: UIColor.systemBackground, NSAttributedString.Key.foregroundColor: UIColor.secondarySystemBackground, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!, NSAttributedString.Key.strokeWidth:2.0]
-        topTextField.defaultTextAttributes = memeTextAttributes
+         let memeTextAttributes: [NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.strokeColor: UIColor.black, NSAttributedString.Key.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+            NSAttributedString.Key.strokeWidth: 2.0]
+        //topTextField.defaultTextAttributes = memeTextAttributes
+        let shade = NSShadow()
+        shade.shadowColor = UIColor.black
+        shade.shadowBlurRadius = 0.5
+       // topTextField.defaultTextAttributes = [NSAttributedString.Key.shadow: shade]
         topTextField.textAlignment = .center
         topTextField.borderStyle = .none
-        bottomTextField.defaultTextAttributes = memeTextAttributes
+      //  bottomTextField.defaultTextAttributes = memeTextAttributes
         bottomTextField.textAlignment = .center
         bottomTextField.borderStyle = .none
     }
@@ -63,6 +85,7 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             imageView.image = image
                }
+        self.shareButton.isEnabled = true
         dismiss(animated: true, completion: nil)
     }
 
@@ -88,9 +111,14 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
 }
 
 extension MemeMeViewController: UITextFieldDelegate {
-
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.clearsOnBeginEditing = true
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        textField.endEditing(true)
+       return true
     }
 
     func subscribeToKeyboardNotifications() {
@@ -107,12 +135,15 @@ extension MemeMeViewController: UITextFieldDelegate {
 
     @objc func keyboardWillShow(_ notification:Notification) {
 
-        view.frame.origin.y -= getKeyboardHeight(notification)
+        if view.frame.origin.y == 0 && self.bottomTextField.isEditing {
+            view.frame.origin.y = view.frame.origin.y - getKeyboardHeight(notification)
+        }
     }
 
     @objc func keyboardWillHide(_ notification:Notification) {
-
-        view.frame.origin.y = 0
+        if view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
        }
 
     func getKeyboardHeight(_ notification:Notification) -> CGFloat {
