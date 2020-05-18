@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
+//MARK: Model for creating a meme
 struct Meme {
-
     var topText: String
     var bottomText: String
     var originalImage: UIImage
