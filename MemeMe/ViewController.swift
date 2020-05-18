@@ -16,10 +16,10 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var shareButton: UIBarButtonItem!
 
-    let memeTextAttributes: [NSAttributedString.Key: Any] = [
-       NSAttributedString.Key.strokeColor: UIColor.black, NSAttributedString.Key.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),
-       NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-       NSAttributedString.Key.strokeWidth: 2.0]
+  let memeTextAttributes: [NSAttributedString.Key: Any] = [
+     NSAttributedString.Key.strokeColor: UIColor.black, NSAttributedString.Key.foregroundColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1),
+     NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+     NSAttributedString.Key.strokeWidth: 2.0]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,16 +80,15 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
          let shade = NSShadow()
          shade.shadowColor = UIColor.black
          shade.shadowBlurRadius = 0.5
-         styleField(topTextField, "TOP")
-         styleField(bottomTextField, "BOTTOM")
+         styleField(topTextField)
+         styleField(bottomTextField)
     }
 
-    func styleField(_ textField: UITextField, _ defaultText: String) {
+    func styleField(_ textField: UITextField) {
         textField.delegate = self
         textField.textAlignment = .center
         textField.defaultTextAttributes = memeTextAttributes
         textField.textAlignment = .center
-        textField.text = defaultText
         textField.borderStyle = .none
     }
     
