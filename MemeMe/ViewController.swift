@@ -16,6 +16,11 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var shareButton: UIBarButtonItem!
 
+    let memeTextAttributes: [NSAttributedString.Key: Any] = [
+       NSAttributedString.Key.strokeColor: UIColor.black, NSAttributedString.Key.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),
+       NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+       NSAttributedString.Key.strokeWidth: 2.0]
+
     override func viewDidLoad() {
         super.viewDidLoad()
         shareButton.isEnabled = false
@@ -40,18 +45,19 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
 
     //MARK: Choose image from Photo Library
     @IBAction func pickImageButtonPressed(_ sender: Any) {
-        let pickerController = UIImagePickerController()
-        pickerController.delegate = self
-        pickerController.sourceType = .photoLibrary
-        present(pickerController,animated: true, completion: nil)
+         pickFromSource(.photoLibrary)
     }
 
     //MARK: Click image using Camera
     @IBAction func cameraButtonPressed(_ sender: Any) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .camera
-        present(imagePicker, animated: true, completion: nil)
+         pickFromSource(.camera)
+    }
+
+    func pickFromSource(_ source: UIImagePickerController.SourceType) {
+        let pickerController = UIImagePickerController()
+        pickerController.delegate = self;
+        pickerController.sourceType = source
+        present(pickerController, animated: true, completion: nil)
     }
 
     //MARK: Presenting Activity View Controller
@@ -71,21 +77,21 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
 
     //MARK: Setting up text fields
     func setupTextFields() {
-         let memeTextAttributes: [NSAttributedString.Key: Any] = [
-            NSAttributedString.Key.strokeColor: UIColor.black, NSAttributedString.Key.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-            NSAttributedString.Key.strokeWidth: 2.0]
-        //topTextField.defaultTextAttributes = memeTextAttributes
-        let shade = NSShadow()
-        shade.shadowColor = UIColor.black
-        shade.shadowBlurRadius = 0.5
-       // topTextField.defaultTextAttributes = [NSAttributedString.Key.shadow: shade]
-        topTextField.textAlignment = .center
-        topTextField.borderStyle = .none
-      //  bottomTextField.defaultTextAttributes = memeTextAttributes
-        bottomTextField.textAlignment = .center
-        bottomTextField.borderStyle = .none
+         let shade = NSShadow()
+         shade.shadowColor = UIColor.black
+         shade.shadowBlurRadius = 0.5
+         styleField(topTextField, "TOP")
+         styleField(bottomTextField, "BOTTOM")
     }
 
+    func styleField(_ textField: UITextField, _ defaultText: String) {
+        textField.delegate = self
+        textField.textAlignment = .center
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.textAlignment = .center
+        textField.text = defaultText
+        textField.borderStyle = .none
+    }
     
     func generateMemedImage() -> UIImage {
 
