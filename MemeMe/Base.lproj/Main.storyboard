@@ -63,7 +63,6 @@
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="udV-bc-NQm" secondAttribute="trailing" constant="20" id="2uQ-5I-KHg"/>
                             <constraint firstItem="FP0-u6-wQm" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="4P1-Da-obI"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="FP0-u6-wQm" secondAttribute="bottom" constant="49" id="6BK-Lt-6fY"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Uxt-J7-EmE" secondAttribute="trailing" constant="20" id="6kS-6B-xgf"/>
                             <constraint firstItem="PrZ-tY-qAc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="7mu-JK-z58"/>
                             <constraint firstItem="FP0-u6-wQm" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="CHU-YQ-MMg"/>
@@ -71,10 +70,11 @@
                             <constraint firstItem="FP0-u6-wQm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="RgG-6H-vuG"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="PrZ-tY-qAc" secondAttribute="bottom" id="Se8-NT-UMw"/>
                             <constraint firstItem="Uxt-J7-EmE" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="35" id="VTL-QK-2yB"/>
+                            <constraint firstItem="udV-bc-NQm" firstAttribute="top" secondItem="FP0-u6-wQm" secondAttribute="bottom" constant="-95.5" id="Y8I-zc-AsY"/>
                             <constraint firstItem="PrZ-tY-qAc" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="gbU-1b-4J2"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="FP0-u6-wQm" secondAttribute="trailing" id="jcA-E9-fZJ"/>
                             <constraint firstItem="Uxt-J7-EmE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="k86-jj-7kG"/>
-                            <constraint firstItem="PrZ-tY-qAc" firstAttribute="top" secondItem="udV-bc-NQm" secondAttribute="bottom" constant="35" id="nOp-xW-vXD"/>
+                            <constraint firstItem="PrZ-tY-qAc" firstAttribute="top" secondItem="FP0-u6-wQm" secondAttribute="bottom" id="lIw-0A-TiE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

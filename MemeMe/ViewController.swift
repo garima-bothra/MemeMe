@@ -9,7 +9,7 @@
 import UIKit
 
 class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+// MARK: IBOutlets
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
@@ -38,6 +38,7 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
         unsubscribeFromKeyboardNotifications()
     }
 
+    //MARK: Choose image from Photo Library
     @IBAction func pickImageButtonPressed(_ sender: Any) {
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
@@ -45,6 +46,7 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
         present(pickerController,animated: true, completion: nil)
     }
 
+    //MARK: Click image using Camera
     @IBAction func cameraButtonPressed(_ sender: Any) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -52,6 +54,7 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
         present(imagePicker, animated: true, completion: nil)
     }
 
+    //MARK: Presenting Activity View Controller
     @IBAction func shareButtonPressed(_ sender: Any) {
         let items = [generateMemedImage()]
         print(items)
@@ -65,6 +68,8 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
             }
         }
     }
+
+    //MARK: Setting up text fields
     func setupTextFields() {
          let memeTextAttributes: [NSAttributedString.Key: Any] = [
             NSAttributedString.Key.strokeColor: UIColor.black, NSAttributedString.Key.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
@@ -81,6 +86,19 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
         bottomTextField.borderStyle = .none
     }
 
+    
+    func generateMemedImage() -> UIImage {
+
+        // Render view to an image
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
+        let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+
+        return memedImage
+    }
+
+    //MARK:- Image Picker Controller Functions
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             imageView.image = image
@@ -98,16 +116,6 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
         let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imageView.image!, memeImage: generateMemedImage())
     }
 
-    func generateMemedImage() -> UIImage {
-
-        // Render view to an image
-        UIGraphicsBeginImageContext(self.view.frame.size)
-        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
-        let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-
-        return memedImage
-    }
 }
 
 extension MemeMeViewController: UITextFieldDelegate {
