@@ -19,7 +19,7 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
   let memeTextAttributes: [NSAttributedString.Key: Any] = [
      NSAttributedString.Key.strokeColor: UIColor.black, NSAttributedString.Key.foregroundColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1),
      NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-     NSAttributedString.Key.strokeWidth: 2.0]
+     NSAttributedString.Key.strokeWidth: -3.0]
 
     override func viewDidLoad() {
         super.viewDidLoad()
